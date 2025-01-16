@@ -33,6 +33,9 @@ import '@ionic/react/css/palettes/dark.system.css';
 /* Theme variables */
 import './theme/variables.css';
 
+/* Pages */
+import RedirectPage from './pages/QRRedirect';
+
 setupIonicReact();
 
 const App: React.FC = () => (
@@ -42,8 +45,11 @@ const App: React.FC = () => (
         <Route exact path="/home">
           <Home />
         </Route>
+        <Route exact path="/redirect">
+          <RedirectPage />  {/* This is the page that will redirect users */} 
+        </Route>
         <Route exact path="/">
-          <Redirect to="/home" />
+          <Redirect to="/redirect" />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
