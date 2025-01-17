@@ -1,10 +1,11 @@
 // Run this script with Node.js to generate a QR code in PNG and SVG format    
+// run node generateQR.js or use npm script
 import QRCode from 'qrcode';
 import fs from 'fs';
 
 // The URL to encode in the QR code
 const url = 'https://obxvacay-qrcoderouting.web.app/';
-const outputLocation = "./QRCode";
+const outputLocation = "./QRCodes/";
 
 // Ensure the output directory exists
 if (!fs.existsSync(outputLocation)){
@@ -12,7 +13,7 @@ if (!fs.existsSync(outputLocation)){
 }
 
 // Generate a PNG file
-QRCode.toFile(outputLocation + '/qrcode.png', url, {
+QRCode.toFile(outputLocation + '/qrcode' + new Date().toISOString().replace(/T/, '_').replace(/\..+/, '') + '.png', url, {
   width: 1000, // Set a high resolution for printing
   errorCorrectionLevel: 'H', // Highest error correction level for reliability
 }, (err) => {
@@ -25,6 +26,6 @@ QRCode.toString(url, { type: 'svg' }, (err, svg) => {
   if (err) throw err;
 
   // Save the SVG to a file
-  fs.writeFileSync(outputLocation + '/qrcode.svg', svg);
+  fs.writeFileSync(outputLocation + '/qrcode' + new Date().toISOString().replace(/T/, '_').replace(/\..+/, '') + '.svg', svg);
   console.log('Vector QR code saved as qrcode.svg');
 });

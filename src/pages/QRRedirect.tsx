@@ -10,7 +10,8 @@ const RedirectPage: React.FC = () => {
       if (/android/i.test(userAgent)) {
         // Redirect Android users to the Google Play Store
         // window.location.href = 'https://play.google.com/store/apps/details?id=your.android.package.name';
-        window.location.href = 'https://obxvacay-ionicreact.web.app/'
+        // window.location.href = 'https://obxvacay-ionicreact.web.app/'
+        window.location.href = 'https://play.google.com/store/apps/details?id=com.wrsf.player'; // site for Dixie app
       } else if (/iPad|iPhone|iPod/.test(userAgent)) {
         // Redirect iOS users to the Apple App Store
         // window.location.href = 'https://apps.apple.com/app/your-ios-app-id';
