@@ -14,7 +14,8 @@ const RedirectPage: React.FC = () => {
       } else if (/iPad|iPhone|iPod/.test(userAgent)) {
         // Redirect iOS users to the Apple App Store
         // window.location.href = 'https://apps.apple.com/app/your-ios-app-id';
-        window.location.href = 'https://obxvacay-ionicreact.web.app/';
+        // window.location.href = 'https://obxvacay-ionicreact.web.app/';
+        window.location.href = 'https://apps.apple.com/us/app/dixie-105-7/id923486347'; // site for Dixie app
       } else {
         // Redirect other users to a landing page or your website
         window.location.href = 'https://obxvacay-ionicreact.web.app/';
@@ -30,7 +31,7 @@ const RedirectPage: React.FC = () => {
       <IonContent className="ion-padding">
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           <IonSpinner name="crescent" />
-          <p style={{ marginTop: '20px', textAlign: 'center' }}>Redirecting you to the appropriate app store...</p>
+          <p style={{ marginTop: '20px', textAlign: 'center' }}>Thanks for checking out our app! Redirecting you to the appropriate app store...</p>
         </div>
       </IonContent>
     </IonPage>

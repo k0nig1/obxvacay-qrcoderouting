@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test.e2e": "cypress run",
     "test.unit": "vitest",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generateQR": "node ./scripts/generateQR.js"
   },
   "dependencies": {
     "@capacitor/app": "6.0.2",
@@ -23,6 +24,7 @@
     "@types/react-router-dom": "^5.3.3",
     "firebase": "^11.2.0",
     "ionicons": "^7.0.0",
+    "qrcode": "^1.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^5.3.4",
