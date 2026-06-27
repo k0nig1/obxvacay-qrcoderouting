@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { IonContent, IonPage, IonSpinner } from '@ionic/react';
+import React, { useEffect, useState } from 'react';
+import { IonContent, IonPage, IonSpinner, IonButton } from '@ionic/react';
 
 /**
  * Destinations for the device-aware redirect.
@@ -11,20 +11,30 @@ import { IonContent, IonPage, IonSpinner } from '@ionic/react';
 const STORE_LINKS = {
   ios: 'https://apps.apple.com/us/app/obxvacay/id6740537702',
   android: 'https://play.google.com/store/apps/details?id=com.ecr.obxvacay',
-  // Desktop / everything else
-  fallback: 'https://obxvacay-qrcoderouting.web.app/',
 };
 
+/**
+ * Modern iPads (iPadOS 13+) report a desktop "Macintosh" user-agent, so the
+ * naive /iPad/ test misses them. A Mac with a touch screen is really an iPad.
+ */
+const isIOS = (ua: string): boolean =>
+  /iPad|iPhone|iPod/.test(ua) ||
+  (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+
 const RedirectPage: React.FC = () => {
+  // Genuine desktop visitors have no app to open, so we show store buttons
+  // instead of redirecting (the old self-referential fallback caused a loop).
+  const [showChooser, setShowChooser] = useState(false);
+
   useEffect(() => {
     const userAgent = navigator.userAgent || navigator.vendor;
 
     if (/android/i.test(userAgent)) {
       window.location.href = STORE_LINKS.android;
-    } else if (/iPad|iPhone|iPod/.test(userAgent)) {
+    } else if (isIOS(userAgent)) {
       window.location.href = STORE_LINKS.ios;
     } else {
-      window.location.href = STORE_LINKS.fallback;
+      setShowChooser(true);
     }
   }, []);
 
@@ -32,10 +42,22 @@ const RedirectPage: React.FC = () => {
     <IonPage>
       <IonContent className="ion-padding">
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-          <IonSpinner name="crescent" />
-          <p style={{ marginTop: '20px', textAlign: 'center' }}>
-            Thanks for checking out our app! Redirecting you to the app store&hellip;
-          </p>
+          {showChooser ? (
+            <>
+              <p style={{ marginBottom: '20px', textAlign: 'center' }}>
+                Get the OBX Vacay app:
+              </p>
+              <IonButton href={STORE_LINKS.ios}>App Store (iPhone &amp; iPad)</IonButton>
+              <IonButton href={STORE_LINKS.android}>Google Play (Android)</IonButton>
+            </>
+          ) : (
+            <>
+              <IonSpinner name="crescent" />
+              <p style={{ marginTop: '20px', textAlign: 'center' }}>
+                Thanks for checking out our app! Redirecting you to the app store&hellip;
+              </p>
+            </>
+          )}
         </div>
       </IonContent>
     </IonPage>
