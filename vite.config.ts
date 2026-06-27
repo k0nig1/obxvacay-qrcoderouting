@@ -14,5 +14,12 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/setupTests.ts',
+    // @ionic/core ships ESM inside a CommonJS package; inline it so Vitest
+    // transforms it instead of failing on the bare `export` syntax.
+    server: {
+      deps: {
+        inline: ['@ionic/core'],
+      },
+    },
   }
 })

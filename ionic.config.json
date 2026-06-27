@@ -1,7 +1,4 @@
 {
   "name": "obxvacay-qrcoderouting",
-  "integrations": {
-    "capacitor": {}
-  },
   "type": "react-vite"
 }
