@@ -1,30 +1,31 @@
 import React, { useEffect } from 'react';
 import { IonContent, IonPage, IonSpinner } from '@ionic/react';
 
+/**
+ * Destinations for the device-aware redirect.
+ *
+ * The printed QR code points at the deployed site (which lands here), so these
+ * are the ONLY values that ever need to change — update a link below and
+ * redeploy, and every existing printed QR code keeps working. No reprinting.
+ */
+const STORE_LINKS = {
+  ios: 'https://apps.apple.com/us/app/obxvacay/id6740537702',
+  android: 'https://play.google.com/store/apps/details?id=com.ecr.obxvacay',
+  // Desktop / everything else
+  fallback: 'https://obxvacay-qrcoderouting.web.app/',
+};
+
 const RedirectPage: React.FC = () => {
   useEffect(() => {
-    // Function to detect the user's device and redirect accordingly
-    const redirectToApp = () => {
-      const userAgent = navigator.userAgent || navigator.vendor;
+    const userAgent = navigator.userAgent || navigator.vendor;
 
-      if (/android/i.test(userAgent)) {
-        // Redirect Android users to the Google Play Store
-        // window.location.href = 'https://play.google.com/store/apps/details?id=your.android.package.name';
-        // window.location.href = 'https://obxvacay-ionicreact.web.app/'
-        window.location.href = 'https://play.google.com/store/apps/details?id=com.wrsf.player'; // site for Dixie app
-      } else if (/iPad|iPhone|iPod/.test(userAgent)) {
-        // Redirect iOS users to the Apple App Store
-        // window.location.href = 'https://apps.apple.com/app/your-ios-app-id';
-        // window.location.href = 'https://obxvacay-ionicreact.web.app/';
-        window.location.href = 'https://apps.apple.com/us/app/dixie-105-7/id923486347'; // site for Dixie app
-      } else {
-        // Redirect other users to a landing page or your website
-        window.location.href = 'https://obxvacay-ionicreact.web.app/';
-      }
-    };
-
-    // Call the redirect function on page load
-    redirectToApp();
+    if (/android/i.test(userAgent)) {
+      window.location.href = STORE_LINKS.android;
+    } else if (/iPad|iPhone|iPod/.test(userAgent)) {
+      window.location.href = STORE_LINKS.ios;
+    } else {
+      window.location.href = STORE_LINKS.fallback;
+    }
   }, []);
 
   return (
@@ -32,7 +33,9 @@ const RedirectPage: React.FC = () => {
       <IonContent className="ion-padding">
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           <IonSpinner name="crescent" />
-          <p style={{ marginTop: '20px', textAlign: 'center' }}>Thanks for checking out our app! Redirecting you to the appropriate app store...</p>
+          <p style={{ marginTop: '20px', textAlign: 'center' }}>
+            Thanks for checking out our app! Redirecting you to the app store&hellip;
+          </p>
         </div>
       </IonContent>
     </IonPage>
