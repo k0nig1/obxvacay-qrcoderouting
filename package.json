@@ -7,7 +7,6 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test.e2e": "cypress run",
     "test.unit": "vitest",
     "lint": "eslint",
     "generateQR": "node ./scripts/generateQR.js"
@@ -17,8 +16,6 @@
     "@ionic/react-router": "^8.0.0",
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
-    "firebase": "^11.2.0",
-    "ionicons": "^7.0.0",
     "qrcode": "^1.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -34,7 +31,6 @@
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-legacy": "^5.0.0",
     "@vitejs/plugin-react": "^4.0.1",
-    "cypress": "^13.5.0",
     "eslint-plugin-react": "^7.32.2",
     "jsdom": "^22.1.0",
     "terser": "^5.4.0",
@@ -42,5 +38,5 @@
     "vite": "~5.2.0",
     "vitest": "^0.34.6"
   },
-  "description": "An Ionic project"
+  "description": "Device-aware QR redirect that routes scanners to the OBX Vacay App Store / Play Store listing."
 }
